@@ -1,0 +1,184 @@
+﻿<Window x:Class="MachineCheck.MachineCheckForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Przegląd maszyny"
+        Height="600" Width="700"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="#F4F6F8"
+        FontFamily="Segoe UI"
+        FontSize="14">
+
+	<Window.Resources>
+		<Style x:Key="ThemedButton" TargetType="Button">
+			<Setter Property="Background" Value="#8E44AD" />
+			<Setter Property="Foreground" Value="White" />
+			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="BorderThickness" Value="0" />
+			<Setter Property="Cursor" Value="Hand" />
+			<Setter Property="Padding" Value="12,8" />
+			<Setter Property="MinHeight" Value="40" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border Background="{TemplateBinding Background}"
+                            CornerRadius="4">
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<!-- Disabled state -->
+				<Trigger Property="IsEnabled" Value="False">
+					<Setter Property="Background" Value="#333333" />
+					<!-- darker gray -->
+					<Setter Property="Foreground" Value="#BBBBBB" />
+				</Trigger>
+				<!-- Mouse over -->
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" Value="#9B59B6" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
+
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<!-- Title -->
+		<TextBlock Text="Formularz przeglądu maszyny"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Margin="0,0,0,20"
+                   HorizontalAlignment="Center"
+                   Foreground="#333" />
+
+		<!-- Form Fields -->
+		<Grid Grid.Row="1" Margin="0,0,0,10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<!-- Machine Code -->
+			<TextBlock Text="Kod maszyny:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" />
+			<TextBox x:Name="txtMachineCode" Grid.Row="0" Grid.Column="1"
+                     Padding="6" Margin="0,0,0,10"
+                     Background="#EEE" BorderBrush="#CCC" BorderThickness="1"
+                     HorizontalAlignment="Stretch"
+                     IsReadOnly="True"
+                     Text="{Binding MachineCode}" />
+
+			<!-- Machine Name -->
+			<TextBlock Text="Nazwa maszyny:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" />
+			<TextBox x:Name="txtMachineName" Grid.Row="1" Grid.Column="1"
+                     Padding="6" Margin="0,0,0,10"
+                     Background="#EEE" BorderBrush="#CCC" BorderThickness="1"
+                     HorizontalAlignment="Stretch"
+                     IsReadOnly="True"
+                     Text="{Binding MachineName}" />
+
+			<!-- Machine Name -->
+			<TextBlock Text="Numer seryjny:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" />
+			<TextBox x:Name="txtSerialNumber" Grid.Row="2" Grid.Column="1"
+                     Padding="6" Margin="0,0,0,10"
+                     Background="White" BorderBrush="#CCC" BorderThickness="1"
+                     HorizontalAlignment="Stretch"
+                     Text="{Binding MachineSerialNumber}" />
+
+			<!-- Interval in Months -->
+			<TextBlock Text="Interwał przeglądu (miesiące):" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" />
+			<ComboBox x:Name="cmbInterval" Grid.Row="3" Grid.Column="1"
+                      Padding="4" Margin="0,0,0,10"
+                      Background="White" BorderBrush="#CCC" BorderThickness="1"
+                      HorizontalAlignment="Left" Width="100"
+                      SelectedValue="{Binding CheckInterval}" SelectedValuePath="Content">
+				<ComboBoxItem Content="1" />
+				<ComboBoxItem Content="3" />
+				<ComboBoxItem Content="6" />
+				<ComboBoxItem Content="12" />
+			</ComboBox>
+
+			<!-- First Check Date -->
+			<TextBlock x:Name="dpFirstCheckLabel" Text="Data pierwszego przeglądu:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" Visibility ="Collapsed" />
+			<DatePicker x:Name="dpFirstCheck"
+                        Grid.Row="4" Grid.Column="1"
+                        Margin="0,0,0,10"
+                        Background="White" BorderBrush="#CCC" BorderThickness="1"
+                        HorizontalAlignment="Left" Width="160"
+                        Visibility ="Collapsed"
+                        SelectedDate="{Binding FirstCheckDate}">
+			</DatePicker>
+
+			<!-- Last Check Date -->
+			<TextBlock x:Name="dpLastCheckLabel" Text="Data ostatniego przeglądu:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" />
+			<DatePicker x:Name="dpLastCheck"
+                        Grid.Row="4" Grid.Column="1"
+                        Margin="0,0,0,10"
+                        Background="#EEE" BorderBrush="#CCC" BorderThickness="1"
+                        HorizontalAlignment="Left" Width="160"
+                        IsEnabled="False"
+                        SelectedDate="{Binding LastCheckDate}">
+			</DatePicker>
+
+			<!-- Next Check Date -->
+			<TextBlock Text="Data następnego przeglądu:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" />
+			<TextBox x:Name="txtNextCheck" Grid.Row="5" Grid.Column="1"
+                     Padding="6" Margin="0,0,0,10"
+                     Background="#EEE" BorderBrush="#CCC" BorderThickness="1"
+                     IsReadOnly="True"
+                     HorizontalAlignment="Left" Width="160"
+                     Text="{Binding NextCheckDate}" />
+
+			<!-- Days Before Notification -->
+			<TextBlock Text="Dni przed powiadomieniem:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" />
+			<TextBox x:Name="txtDaysBefore" Grid.Row="6" Grid.Column="1"
+                     Padding="6" Margin="0,0,0,10"
+                     Background="White" BorderBrush="#CCC" BorderThickness="1"
+                     HorizontalAlignment="Left" Width="80"
+                     Text="{Binding DaysBeforeNotif}" />
+
+			<!-- Email -->
+			<TextBlock Text="Email do powiadomień:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" />
+			<TextBox x:Name="txtEmail" Grid.Row="7" Grid.Column="1"
+                     Padding="6"
+                     Background="White" BorderBrush="#CCC" BorderThickness="1"
+                     HorizontalAlignment="Stretch"
+                     Text="{Binding NotifEmail}" />
+		</Grid>
+
+		<!-- Buttons -->
+		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+			<Button x:Name="HistoryButton" Content="Historia przeglądów" Width="160" Margin="0,0,10,0"
+                    Background="#8E44AD" Style="{StaticResource ThemedButton}"
+                    IsEnabled="{Binding CanShowHistory}"
+                    Click="HistoryButton_Click" />
+			<Button x:Name="GenerateProtocolButton" Content="Generuj protokół" Width="150" Margin="0,0,10,0"
+                    Background="#2196F3" Style="{StaticResource ThemedButton}"
+                    IsEnabled="{Binding IsSaved}" Click="GenerateProtocolButton_Click" />
+			<Button x:Name="CheckButton" Content="Wgraj protokół" Width="150" Margin="0,0,10,0"
+                    Background="#FF9800" Style="{StaticResource ThemedButton}"
+                    IsEnabled="{Binding IsSaved}" Click="CheckButton_Click" />
+			<Button x:Name="SaveButton" Content="Zapisz" Width="100"
+                    Background="#4CAF50" Style="{StaticResource ThemedButton}"
+                    Click="SaveButton_Click" />
+		</StackPanel>
+	</Grid>
+</Window>

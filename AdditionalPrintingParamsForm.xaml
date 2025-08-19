@@ -1,0 +1,63 @@
+﻿<Window x:Class="MachineCheck.AdditionalPrintingParamsForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Dodatkowe parametry" Width="400" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <!-- Param 1 -->
+            <TextBlock Text="Nr. seryjny maszyny:" Margin="0,5,0,0" />
+            <TextBox x:Name="SerialNumberTextBox" />
+
+            <!-- Param 2 -->
+            <TextBlock Text="Osoby dokonujące przeglądu:" Margin="0,5,0,0" />
+            <TextBox x:Name="CheckPersonsTextBox" />
+
+            <!-- Check 1: Sprawdzenie ogólnego stanu technicznego -->
+            <CheckBox x:Name="GeneralConditionCheckBox" Content="Sprawdzenie ogólnego stanu technicznego" Margin="0,10,0,0" />
+            <TextBlock Text="Uwagi:" Margin="20,2,0,0" />
+            <TextBox x:Name="GeneralConditionNotesTextBox" Margin="20,0,0,0" />
+
+            <!-- Check 2: Sprawdzenie instalacji elektrycznej -->
+            <CheckBox x:Name="ElectricalCheckBox" Content="Sprawdzenie instalacji elektrycznej w maszynie" Margin="0,10,0,0" />
+            <TextBlock Text="Uwagi:" Margin="20,2,0,0" />
+            <TextBox x:Name="ElectricalNotesTextBox" Margin="20,0,0,0" />
+
+            <!-- Check 3: Sprawdzenie maszyny pod względem BHP -->
+            <CheckBox x:Name="BHPCheckBox" Content="Sprawdzenie maszyny pod względem BHP" Margin="0,10,0,0" />
+            <TextBlock Text="Uwagi:" Margin="20,2,0,0" />
+            <TextBox x:Name="BHPNotesTextBox" Margin="20,0,0,0" />
+
+            <!-- Check 4: Sprawdzenie dokładności maszyny -->
+            <CheckBox x:Name="PrecisionCheckBox" Content="Sprawdzenie dokładności maszyny" Margin="0,10,0,0" />
+            <TextBlock Text="Użyte przyrządy pomiarowe:" Margin="20,5,0,0" />
+            <CheckBox x:Name="PrecisionMeasurementsCheckBox" Content="Poziomica precyzyjna" Margin="20,2,0,0" />
+            <CheckBox x:Name="DialIndicatorCheckBox" Content="Czujnik zegarowy" Margin="20,2,0,0" />
+            <CheckBox x:Name="CaliperCheckBox" Content="Suwmiarka" Margin="20,2,0,0" />
+            <CheckBox x:Name="MicrometerCheckBox" Content="Mikrometr" Margin="20,2,0,0" />
+            <CheckBox x:Name="GaugeCheckBox" Content="Średnicówka" Margin="20,2,0,0" />
+            <CheckBox x:Name="ProtractorCheckBox" Content="Kątomierz" Margin="20,2,0,0" />
+            <CheckBox x:Name="CurrentMeterCheckBox" Content="Miernik prądu" Margin="20,2,0,0" />
+            <TextBlock Text="Inne przyrządy pomiarowe:" Margin="20,2,0,0" />
+            <TextBox x:Name="AdditionalMeasurmentsTextBox" Margin="20,0,0,0" />
+            <TextBlock Text="Uwagi:" Margin="20,2,0,0" />
+            <TextBox x:Name="PrecisionTextBox" Margin="20,0,0,0" />
+
+            <TextBlock Text="Zalecenia końcowe:" Margin="0,5,0,0" />
+            <TextBox x:Name="FinalSuggestionsTextBox" />
+
+            <TextBlock Text="Osoba odpowiedzialna za usunięcie ewentualnych usterek:" Margin="0,5,0,0" />
+            <TextBox x:Name="ResponsiblePersonTextBox" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0,10,0,0">
+            <Button Width="80" Margin="5" Content="OK" Click="OkButton_Click" Background="#4CAF50" Padding="4" Foreground="White" />
+            <Button Width="80" Margin="5" Content="Anuluj" Click="CancelButton_Click" Background="Red" Padding="4" Foreground="White" />
+        </StackPanel>
+    </Grid>
+</Window>
